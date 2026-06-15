@@ -7,21 +7,11 @@
 
 🌐 **[在线文档站](https://awesome-embedded-learning-studio.github.io/EmbedBox/)**
 
-作者 Charliechen114514 · 联系方式 725610365@qq.com
-
-本项目隶属于组织 [Awesome-Embedded-Learning-Studio](https://github.com/Awesome-Embedded-Learning-Studio) 的文档教程体系。
-
 ## 这是什么？
 
 EmbedBox 是面向嵌入式开发者的「公共语言」入门坡道：在进入 AwesomeQt / ModernCPP / PenguinLAB / 各 forge 之前，先把终端、Git、Markdown、编译链、CMake、GDB、交叉编译、串口这些通用工具学会。它只负责把工具教透，不替中心站 [Awesome-Embedded](https://github.com/Awesome-Embedded-Learning-Studio/Awesome-Embedded) 做导航。
 
 **适合谁？** 刚起步的嵌入式自学者 · 只会一点 PowerShell / 命令行的硬件朋友 · 想补齐「工具链前置知识」再啃具体航线的开发者。
-
-## 快速目录
-
-- [WSL2 + Linux + VS Code 远程开发](./tutorial/WSL/wsl.md)
-- [Markdown 零基础入门](./tutorial/markdown/markdown.md)
-- [Git 团队协作完全入门指南](./tutorial/git/index.md)（分 7 篇）
 
 ## 本地预览 / 构建
 
@@ -42,8 +32,6 @@ pnpm preview        # 预览构建产物
 | [`site/`](./site/) | VitePress 站点配置、主题、插件（`.vitepress/`） |
 | [`examples/`](./examples/instructions.md) | 配套示例代码 / 硬件电路图 / PCB 等资产 |
 | [`project.config.ts`](./project.config.ts) | 站点元信息（名称、导航、侧栏 volume 等） |
-
-推送到 `main` 分支会自动经 GitHub Actions 构建并部署到 GitHub Pages；提 PR 时 `Build Check` 会自动跑 `pnpm build` 校验（含死链检查）。
 
 ## 许可证与联系方式
 

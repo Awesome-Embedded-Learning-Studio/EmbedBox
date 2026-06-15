@@ -4,6 +4,7 @@ import type { Theme } from 'vitepress'
 import HomeTipBanner from './components/HomeTipBanner.vue'
 import ChapterNav from './components/ChapterNav.vue'
 import ChapterLink from './components/ChapterLink.vue'
+import { setupMermaid } from './mermaid-client'
 import './custom.css'
 
 export default {
@@ -16,5 +17,8 @@ export default {
   enhanceApp({ app }) {
     app.component('ChapterNav', ChapterNav)
     app.component('ChapterLink', ChapterLink)
+  },
+  setup() {
+    setupMermaid()
   }
 } satisfies Theme

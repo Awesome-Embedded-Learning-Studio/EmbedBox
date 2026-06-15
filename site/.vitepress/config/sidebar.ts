@@ -23,13 +23,26 @@ function humanize(name: string): string {
     .replace(/\b\w/g, c => c.toUpperCase())
 }
 
-function sortEntries(a: string, b: string): number {
-  const na = a.match(/^(\d+)/)?.[1]
-  const nb = b.match(/^(\d+)/)?.[1]
-  if (na && nb) return parseInt(na) - parseInt(nb)
-  if (na) return -1
-  if (nb) return 1
-  return a.localeCompare(b, 'en')
+function extractOrder(filePath: string): number | null {
+  try {
+    const content = readFileSync(filePath, 'utf-8')
+    const m = content.match(/^order:\s*(-?\d+)/m)
+    return m ? parseInt(m[1], 10) : null
+  } catch { /* ignore */ }
+  return null
+}
+
+// 排序键：优先读 frontmatter 的 order（目录读其 index.md），
+// 其次按文件名数字前缀，最后置末尾按名字排——让门类/章节按学习顺序而非字母序排列。
+function entryOrder(fullPath: string): number {
+  let fmPath = fullPath
+  try {
+    if (statSync(fullPath).isDirectory()) fmPath = join(fullPath, 'index.md')
+  } catch { /* ignore */ }
+  const o = extractOrder(fmPath)
+  if (o != null) return o
+  const np = fullPath.split(/[/\\]/).pop()!.match(/^(\d+)/)?.[1]
+  return np ? parseInt(np, 10) : Number.MAX_SAFE_INTEGER
 }
 
 function scanDir(dir: string, urlPrefix: string, depth = 0): SidebarItem[] {
@@ -46,7 +59,12 @@ function scanDir(dir: string, urlPrefix: string, depth = 0): SidebarItem[] {
     )
   } catch { return [] }
 
-  entries.sort(sortEntries)
+  entries.sort((a, b) => {
+    const oa = entryOrder(join(dir, a))
+    const ob = entryOrder(join(dir, b))
+    if (oa !== ob) return oa - ob
+    return a.localeCompare(b, 'en')
+  })
   const items: SidebarItem[] = []
 
   for (const name of entries) {

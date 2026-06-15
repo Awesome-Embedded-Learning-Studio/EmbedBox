@@ -52,6 +52,7 @@ export interface ProjectConfig {
     cppTemplateEscape?: boolean
     kbd?: boolean
     math?: boolean
+    mermaid?: boolean
   }
 
   homeBanner?: Record<string, string>

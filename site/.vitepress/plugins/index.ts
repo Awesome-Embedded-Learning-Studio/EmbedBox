@@ -10,4 +10,8 @@ export function resolvePlugins(md: MarkdownIt, config: ProjectConfig): void {
     const { kbdPlugin } = require('./kbd-plugin')
     md.use(kbdPlugin)
   }
+  if (config.plugins.mermaid) {
+    const { mermaidPlugin } = require('./mermaid-plugin')
+    md.use(mermaidPlugin)
+  }
 }

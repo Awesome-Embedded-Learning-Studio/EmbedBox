@@ -48,6 +48,7 @@ export default defineProject({
     cppTemplateEscape: false,
     kbd: false,
     math: false,
+    mermaid: true,
   },
 
   favicon: '/EmbedBox/Awesome-Embedded.ico',
